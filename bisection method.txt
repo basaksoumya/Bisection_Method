@@ -1,0 +1,76 @@
+//********Soumyadip Basak*********//
+//Implementation of bisection method in C/C++
+
+#include <stdio.h>
+#include <stdlib.h>
+#include<conio.h>
+
+double function(double);
+double root(double,double);
+
+int main()
+{
+    system("color 70");
+    float a,b;
+    int n,i;
+    printf("enter the value of a(f(a)<0)=");
+    scanf("%f",&a);
+    printf("\nenter the value of b(f(b)>0)=");
+    scanf("%f",&b);
+    while(1)
+    {
+    printf("\nDo you want to exit?\n");
+    printf("if yes then enter the key 0!otherwise enter any key\n");
+    int e;
+    scanf("%d",&e);
+    if(e==0)
+        exit(0);
+    if(e!=0)
+    {
+    printf("\nhow many times you want to do calculation= ");
+    scanf("%d",&n);
+    double x1,r;
+    x1=(a+b)/2;
+    for(i=2;i<=n;i++)
+    {
+       r=function(x1);
+    if(r>0)
+    {
+        b=x1;
+       x1=root(x1,a);
+       r=x1;
+       if(function(x1)<0)
+        a=x1;
+       else
+        b=x1;
+    }
+    if(r<0)
+    {
+        a=x1;
+       x1=root(x1,b);
+       r=x1;
+       if(function(x1)>0)
+        b=x1;
+       else
+        a=x1;
+    }
+    }
+    printf("\nthe value of the approximate root is %lf(%d times)",r,n);
+    }
+    }
+    getch();
+}
+
+double function(double x)
+{
+    double y;
+    y=x*x*x-4*x-9;
+    return y;
+}
+
+double root(double x,double y)
+{
+    double a;
+    a=(x+y)/2;
+    return a;
+}
